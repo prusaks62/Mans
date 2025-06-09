@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+ <meta name="description" content="Spēja ievadīt audzēķņu vārdus un tos sagrupēt nejaušās grupās.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="fire.png">
+  <title>ClassSplitter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+  <h1>Grupu sadalītājs</h1>
+</header>
+<br>
+  <div class="snowfall" aria-hidden="true"></div>
+  <form>
+   <div class="Group">
+  <div class="Group1">
+    <label for="kidsNM">Ievadiet audzēkņu vārdus</label>
+    <input type="text" id="kidsNM" minlength="1">
+    <button type="button" onclick="createInput()">Ievadīt</button>
+    <button type="reset">Dzēst</button>
+     <div class="names"> 
+    <button type="reset" onclick="deleteNM()">Dzēst ievadītos vārdus</button>     
+  <p id="kidsnm">Ievadītie vārdi:</p>
+  </div>
+  </div>
+  <div class="Group2">
+     <label for="kidsGP">Ievadiet grupas izmēru</label>
+    <input type="number" id="kidsGP" min="1">
+    <button type="reset">Dzēst</button>
+    <div class="Genet">
+    <button type="button" onclick="createGen()">Ģenerēt jauktas grupas</button> 
+    </div>
+    <div>
+        <p id="genetB">Ģenerētās grupas:</p>
+    </div>
+  </div>
+</div>
+  </form>
+  <footer>
+    &copy; Patriks 2025
+  </footer>
+  <script src="apple.js"></script> 
+</body>
+</html>
