@@ -20,24 +20,22 @@
     <label for="kidsNM">Ievadiet audzēkņu vārdus</label>
     <input type="text" id="kidsNM" minlength="1">
     <button type="button" onclick="createInput()">Ievadīt</button>
-    <button type="reset">Dzēst</button>
-     <div class="names"> 
-    <button type="reset" onclick="deleteNM()">Dzēst ievadītos vārdus</button>     
-  <p id="kidsnm">Ievadītie vārdi:</p>
-  </div>
+    <button type="reset">Dzēst</button><br>
   </div>
   <div class="Group2">
      <label for="kidsGP">Ievadiet grupas izmēru</label>
     <input type="number" id="kidsGP" min="1">
     <button type="reset">Dzēst</button>
-    <div class="Genet">
-    <button type="button" onclick="createGen()">Ģenerēt jauktas grupas</button> 
-    </div>
-    <div>
-        <p id="genetB">Ģenerētās grupas:</p>
-    </div>
-  </div>
 </div>
+   </div>
+<div class="Genet">
+    <button type="button" onclick="createGen()">Ģenerēt jauktas grupas</button> <br>
+    <label id="genetB">Ģenerētās grupas:</label>
+  </div>
+<div class="enterNM ">
+    <div><button type="reset" onclick="deleteNM()">Dzēst ievadītos vārdus</button><br>
+        <label id="kidsnm">Ievadītie vārdi:</label>      
+      </div> 
   </form>
   <footer>
     &copy; Patriks 2025
