@@ -42,32 +42,31 @@ font-size: 70%;
     text-align:center;
 }
 
-.Group1{
-float:left;
-}
-
-.Group2{
-    float: right;
-}
-
-.enterNM{
-    float: left;
-    left: 50px;
-}
 
 
-.Genet {
-    float: right;
-
+.enterNM {
+  flex: 1 1 45%;
+  padding: 15px;
+  background-color: #ffffff80;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
 }
   
+.Genet{
+  text-align: center;
+  flex: 0 1 auto;
+  padding: 15px;
+  background-color: #ffffff80;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
+}
+
 footer{
    position: fixed;
-   left: 0;
+   left:  0;
    bottom: 0;
    width: 100%;
-   
-   color: #00008B;
+   color: #000000;
    text-align: left;
 }
 
@@ -77,35 +76,58 @@ footer{
   display: flex ;
  flex-direction: column;
  }
- header{
-    width: 70%;
-    max-width: 600px;
-    margin: 0 auto 10px;
-    padding: 10px;
-    display: flex; 
-   justify-content: center;
- }
+
 
  h1{
    display: flex; 
    justify-content: center;
  }
+
 body{
     
     font-family: 'Times New Roman', Times, serif; 
     margin: 20px;
     font-size:110%;
     position: relative;
-    min-block-size: 100vh; 
+    min-block-size: 100vh;   
+}
+
+.Group {
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+}
+
+
+
+.enterNM {
+  flex-direction: column;
+  flex: 1 1 45%;
+  padding: 15px;
+  background-color: #ffffff80;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
+  text-align: center;
 
 }
+  
+.Genet{
+  text-align: center;
+  flex: 0 1 auto;
+  padding: 15px;
+  background-color: #ffffff80;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
+}
+
+
+
 footer{
   position: fixed;
    left: 0;
    bottom: 0;
    width: 100%;
-   
-   color: #00008B;
+   color: #000000;
    text-align: left;
 }    
 }
