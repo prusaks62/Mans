@@ -96,10 +96,7 @@ button,
 input {
 border-radius: 70px;
 font-size: 90%;
-
 }
-
-
 .Group {
     display: flex;
     flex-direction: column;
