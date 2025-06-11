@@ -68,6 +68,7 @@ footer{
    width: 100%;
    color: #000000;
    text-align: left;
+   opacity: 0.4;
 }
 
 
@@ -134,5 +135,7 @@ footer{
    width: 100%;
    color: #000000;
    text-align: left;
+   font-size: 70%;
+   opacity: 0.4;
 }    
 }
