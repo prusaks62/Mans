@@ -31,8 +31,8 @@ body{
 
 button,
 input {
-border-radius: 50px;
-font-size: 70%;
+border-radius: 60px;
+font-size: 80%;
 
 }
 
@@ -87,10 +87,18 @@ body{
     
     font-family: 'Times New Roman', Times, serif; 
     margin: 20px;
-    font-size:110%;
+    font-size:120%;
     position: relative;
     min-block-size: 100vh;   
 }
+
+button,
+input {
+border-radius: 70px;
+font-size: 90%;
+
+}
+
 
 .Group {
     display: flex;
