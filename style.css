@@ -89,14 +89,19 @@ body{
     font-family: 'Times New Roman', Times, serif; 
     margin: 20px;
     font-size:120%;
-    position: relative;
-    min-block-size: 100vh;   
+    position: relative;  
 }
 
 button,
 input {
+
+justify-content: space-between;
+flex-direction: column;
+
 border-radius: 70px;
 font-size: 90%;
+
+
 }
 .Group {
     display: flex;
