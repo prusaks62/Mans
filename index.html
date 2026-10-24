@@ -1,45 +1,147 @@
 <!DOCTYPE html>
-<html lang="lv">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
- <meta name="description" content="Spēja ievadīt audzēķņu vārdus un tos sagrupēt nejaušās grupās.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="fire.png">
-  <title>ClassSplitter</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ClassSplitter</title>
+    <meta name="description" content="Split a class into random groups in seconds. Save class lists, mark who is absent, keep certain students apart and pick a random student fairly.">
+    <link rel="icon" type="image/png" href="fire.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-  <h1>Grupu sadalītājs</h1>
-</header>
-<br>
-  <form>
-    <div class="Group">
-      <div class="Group1">
-        <label for="kidsNM">Ievadiet audzēkņu vārdus</label>
-        <input type="text" id="kidsNM" minlength="1">
-        <button type="button" onclick="createInput()">Ievadīt</button>
-        <button type="reset" onclick="deleteNM()">Dzēst ievadītos vārdus</button>
-      </div>
-      <div class="Group2">
-        <label for="kidsGP">Ievadiet grupas izmēru</label>
-        <input type="number" id="kidsGP" min="1">
-        <button type="reset">Dzēst</button>
-        <button type="button" onclick="createGen()">Ģenerēt jauktas grupas</button>
-      </div>
-    </div>
-    <br>
-    <div class="enterNM ">
-      <label id="kidsnm">Ievadītie vārdi:</label>      
-    </div> 
-    <br>
-    <div class="Genet">
-      <label id="genetB">Ģenerētās grupas:</label>
-    </div>
-  </form>
-  <footer>
-    &copy; Patriks 2025
-  </footer>
-  <script src="apple.js"></script> 
+    <header class="topbar">
+        <a class="logo" href="./">ClassSplitter</a>
+
+        <!-- Saved classes -->
+        <div class="class-picker">
+            <label for="class-select" class="visually-hidden">Class</label>
+            <select id="class-select"></select>
+            <button class="btn btn-quiet" id="new-class" type="button">New class</button>
+            <button class="btn btn-quiet" id="rename-class" type="button">Rename</button>
+            <button class="btn btn-quiet danger-text" id="delete-class" type="button">Delete</button>
+        </div>
+    </header>
+
+    <main class="layout">
+        <!-- Students -->
+        <section class="panel students" aria-labelledby="students-title">
+            <div class="panel-head">
+                <h2 id="students-title">Students</h2>
+                <p class="count" id="student-count"></p>
+            </div>
+
+            <form id="add-form" class="add-form">
+                <label for="name-input" class="visually-hidden">Add students</label>
+                <textarea id="name-input" rows="1" placeholder="Type a name or paste a list"></textarea>
+                <button class="btn btn-primary" type="submit">Add</button>
+            </form>
+            <p class="hint">Press Enter to add. Click a name to mark them absent today; absent students are left out of groups.</p>
+            <p class="notice" id="add-notice" role="status"></p>
+
+            <ul class="tags" id="student-list"></ul>
+
+            <div class="empty-students" id="empty-students" hidden>
+                <p>No students in this class yet.</p>
+                <button class="btn btn-quiet" id="load-example" type="button">Try it with an example class</button>
+            </div>
+
+            <div class="panel-foot" id="students-foot">
+                <button class="btn btn-quiet" id="all-present" type="button">Mark everyone present</button>
+                <button class="btn btn-quiet danger-text" id="clear-students" type="button">Remove all students</button>
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section class="panel settings" aria-labelledby="settings-title">
+            <div class="panel-head">
+                <h2 id="settings-title">Make groups</h2>
+            </div>
+
+            <fieldset class="split-mode">
+                <legend>Split by</legend>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="size" checked>
+                    <span>Group size</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="count">
+                    <span>Number of groups</span>
+                </label>
+                <div class="stepper">
+                    <button type="button" id="minus" aria-label="Less">−</button>
+                    <input type="number" id="amount" value="3" min="1" max="50" aria-label="Group size">
+                    <button type="button" id="plus" aria-label="More">+</button>
+                </div>
+                <p class="preview" id="preview"></p>
+            </fieldset>
+
+            <div class="toggles">
+                <label class="toggle">
+                    <input type="checkbox" id="opt-roles">
+                    <span><strong>Give everyone a role</strong> Leader, Writer, Timekeeper, Presenter…</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="opt-mix" checked>
+                    <span><strong>Mix it up</strong> Avoid putting people together who were in the same group last time</span>
+                </label>
+            </div>
+
+            <div class="apart">
+                <h3>Keep apart</h3>
+                <p class="hint">These pairs will never be put in the same group.</p>
+                <form class="apart-form" id="apart-form">
+                    <select id="apart-a" aria-label="First student"></select>
+                    <span aria-hidden="true">and</span>
+                    <select id="apart-b" aria-label="Second student"></select>
+                    <button class="btn btn-quiet" type="submit">Add</button>
+                </form>
+                <ul class="apart-list" id="apart-list"></ul>
+            </div>
+
+            <button class="btn btn-primary btn-big" id="make-groups" type="button">Make groups</button>
+            <p class="notice" id="make-notice" role="status"></p>
+        </section>
+
+        <!-- Results -->
+        <section class="results" id="results" aria-labelledby="results-title" hidden>
+            <div class="results-head">
+                <h2 id="results-title">Groups</h2>
+                <div class="results-actions">
+                    <button class="btn btn-quiet" id="reshuffle" type="button">Shuffle again</button>
+                    <button class="btn btn-quiet" id="copy" type="button">Copy as text</button>
+                    <button class="btn btn-quiet" id="present" type="button">Present</button>
+                </div>
+            </div>
+            <p class="notice" id="results-notice" role="status"></p>
+            <div class="groups" id="groups"></div>
+        </section>
+
+        <!-- Fair random picker -->
+        <section class="panel picker" aria-labelledby="picker-title">
+            <div class="panel-head">
+                <h2 id="picker-title">Pick a student</h2>
+                <p class="count" id="picker-count"></p>
+            </div>
+            <p class="hint">Picks at random, but nobody is picked twice until everyone has had a turn.</p>
+            <div class="picker-stage">
+                <p class="picked" id="picked">?</p>
+            </div>
+            <p class="visually-hidden" id="picked-announce" aria-live="polite"></p>
+            <div class="picker-actions">
+                <button class="btn btn-primary" id="pick" type="button">Pick</button>
+                <button class="btn btn-quiet" id="pick-reset" type="button">Start a new round</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Everything is saved in this browser only. Nothing is sent anywhere.</p>
+        <p>© <span id="year">2026</span> Patriks</p>
+    </footer>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
